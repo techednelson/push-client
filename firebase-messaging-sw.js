@@ -1,7 +1,8 @@
+// Scripts for firebase and firebase messaging
 // eslint-disable-next-line no-undef
-importScripts('https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js');
+importScripts("https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js");
 // eslint-disable-next-line no-undef
-importScripts('https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging-compat.js');
+importScripts("https://www.gstatic.com/firebasejs/8.2.0/firebase-messaging.js");
 
 // Initialize the Firebase app in the service worker by passing the generated config
 const firebaseConfig = {
@@ -13,20 +14,19 @@ const firebaseConfig = {
   appId: "1:327795312923:web:557079104d0d21f71b6bbe"
 };
 
+
 firebase.initializeApp(firebaseConfig);
 
 // Retrieve firebase messaging
 const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage(function(payload) {
-  console.log('Received background message ', payload);
+  console.log("Received background message ", payload);
 
   const notificationTitle = payload.notification.title;
   const notificationOptions = {
     body: payload.notification.body,
   };
 
-  // eslint-disable-next-line no-restricted-globals
-  self.registration.showNotification(notificationTitle,
-    notificationOptions);
+  self.registration.showNotification(notificationTitle, notificationOptions);
 });
